@@ -1,5 +1,5 @@
 {
-  "id": "85699a46-e741-40e2-8bc1-ddfb4982e0ad",
+  "id": "bf87c76a-548f-49e0-b972-87884accf03b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -92,13 +92,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "role": {
           "name": "role",
-          "type": "roles",
-          "typeSchema": "public",
+          "type": "varchar(15)",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'guest'"
+          "notNull": true,
+          "default": "'user'"
         },
         "updated_at": {
           "name": "updated_at",
@@ -153,17 +158,7 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {
-    "public.roles": {
-      "name": "roles",
-      "schema": "public",
-      "values": [
-        "guest",
-        "user",
-        "admin"
-      ]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},

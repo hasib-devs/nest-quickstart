@@ -3,6 +3,7 @@ import {
   DrizzleAsyncProvider,
 } from '@/common/providers/drizzle.provider';
 import { usersTable } from '@/database/schemas/users.schema';
+import { CreateUserDto } from '@/modules/api/users/dto/create-user.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
@@ -18,7 +19,16 @@ export class UserRepository {
   }
 
   async findById(id: number) {
-    return await this.db.select().from(usersTable).where(eq(usersTable.id, id));
+    const result = await this.db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, id));
+
+    if (result.length === 0) {
+      return null;
+    }
+
+    return result[0];
   }
 
   async findByEmail(email: string) {
@@ -28,8 +38,12 @@ export class UserRepository {
       .where(eq(usersTable.email, email));
   }
 
-  async createUser(name: string, email: string) {
-    return await this.db.insert(usersTable).values({ name, email }).returning();
+  async createUser(createUserDto: CreateUserDto) {
+    const result = await this.db
+      .insert(usersTable)
+      .values(createUserDto)
+      .returning();
+    return result[0];
   }
 
   async updateUser(id: number, name: string, email: string) {

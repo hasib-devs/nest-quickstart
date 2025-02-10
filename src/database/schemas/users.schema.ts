@@ -1,5 +1,4 @@
 import {
-  pgEnum,
   pgTable,
   serial,
   text,
@@ -8,9 +7,6 @@ import {
 } from 'drizzle-orm/pg-core';
 import { timestamps } from '../helpers/columns.helpers';
 
-// Define an enum for user roles
-export const rolesEnum = pgEnum('roles', ['guest', 'user', 'admin']);
-
 // Define a users table
 export const usersTable = pgTable(
   'users',
@@ -18,7 +14,8 @@ export const usersTable = pgTable(
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 255 }).notNull(),
     email: text('email').unique().notNull(),
-    role: rolesEnum().default('guest'),
+    password: text('password').notNull(),
+    role: varchar('role', { length: 15 }).notNull().default('user'),
     ...timestamps,
   },
   (table) => [uniqueIndex('email_idx').on(table.email)],
