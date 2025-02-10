@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRepository } from './user.repository';
+import { UserRepository } from '../../../common/repositories/users.repository';
 
 @Injectable()
 export class UsersService {
@@ -12,18 +12,18 @@ export class UsersService {
 
   async findAll() {
     const data = await this.userRepository.findAll();
-    console.log(data);
-    return {
-      message: 'This action returns all users',
-      data,
-    };
+    return data;
   }
 
-  findOne(id: number) {
-    return {
-      message: 'This action returns a #${id} user',
-      id,
-    };
+  async findOne(identifier: number) {
+    const data = await this.userRepository.findById(identifier);
+    if (data.length === 0) {
+      return {
+        message: 'User not found',
+      };
+    }
+
+    return data[0];
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

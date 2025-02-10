@@ -20,3 +20,6 @@ export const drizzleProvider = [
     },
   },
 ];
+
+export type Database = NodePgDatabase<typeof schema>;
+export type DrizzleProvider = typeof DrizzleAsyncProvider;

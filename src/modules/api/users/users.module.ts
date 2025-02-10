@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { UserRepository } from './user.repository';
+import { UserRepository } from '../../../common/repositories/users.repository';
 import { DrizzleModule } from '@/common/modules/drizzle.module';
 
 @Module({
