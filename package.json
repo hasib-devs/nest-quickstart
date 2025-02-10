@@ -17,7 +17,14 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:check": "npx drizzle-kit check",
+    "db:push": "npx drizzle-kit push",
+    "db:pull": "npx drizzle-kit pull",
+    "db:up": "npx drizzle-kit up",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -27,8 +34,10 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
+    "drizzle-orm": "^0.39.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -43,7 +52,10 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
+    "@types/pg": "^8.11.11",
     "@types/supertest": "^6.0.2",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.30.4",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
