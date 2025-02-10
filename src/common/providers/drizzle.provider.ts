@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
-import * as schema from '@/database/schemas';
+import * as schemas from '@/database/schemas';
 import { ConfigService } from '@nestjs/config';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
@@ -16,10 +16,12 @@ export const drizzleProvider = [
         connectionString,
       });
 
-      return drizzle(pool, { schema }) as NodePgDatabase<typeof schema>;
+      return drizzle(pool, { schema: schemas }) as NodePgDatabase<
+        typeof schemas
+      >;
     },
   },
 ];
 
-export type Database = NodePgDatabase<typeof schema>;
+export type Database = NodePgDatabase<typeof schemas>;
 export type DrizzleProvider = typeof DrizzleAsyncProvider;
