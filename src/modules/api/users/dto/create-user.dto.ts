@@ -1,4 +1,5 @@
 import { Role } from '@/common/enums/role.enum';
+import { IsEmailUnique } from '@/common/validators/is-email-unique.validator';
 import { Transform } from 'class-transformer';
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
 
@@ -8,12 +9,12 @@ export class CreateUserDto {
   })
   name: string;
 
+  @IsEmailUnique()
   @IsEmail({}, { message: 'Invalid email' })
+  @IsNotEmpty({ message: 'Email is required' })
   email: string;
 
-  @IsNotEmpty({
-    message: 'Password is required',
-  })
+  @IsNotEmpty({ message: 'Password is required' })
   password: string;
 
   @IsOptional()

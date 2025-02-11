@@ -13,7 +13,7 @@ export class AuthService {
     private readonly hashService: HashService,
   ) {}
   async validateUser(signinDto: SigninDto) {
-    const user = await this.userService.findOne(signinDto.email);
+    const user = await this.userService.findByEmail(signinDto.email);
     if (
       user &&
       (await this.hashService.compareHash(signinDto.password, user.password))

@@ -23,12 +23,12 @@ export class UsersService {
     return await this.userRepository.findAll();
   }
 
-  async findOne(identifier: number | string) {
-    if (typeof identifier === 'string') {
-      return await this.userRepository.findByEmail(identifier);
-    }
+  async findOne(id: number) {
+    return await this.userRepository.findById(id);
+  }
 
-    return await this.userRepository.findById(identifier);
+  async findByEmail(email: string) {
+    return await this.userRepository.findByEmail(email);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

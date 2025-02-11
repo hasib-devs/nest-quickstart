@@ -6,10 +6,14 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SigninDto, SignupDto } from './dto/auth.dto';
+import { UsersService } from '../users/users.service';
 
 @Controller('api')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UsersService,
+  ) {}
 
   @Post('signin')
   async signin(@Body() signinDto: SigninDto) {
@@ -31,8 +35,14 @@ export class AuthController {
       ...token,
     };
   }
+
   @Post('signup')
-  signup(@Body() signupDto: SignupDto) {
-    return signupDto;
+  async signup(@Body() signupDto: SignupDto) {
+    const user = await this.userService.create(signupDto);
+    const token = this.authService.generateToken(user);
+    return {
+      user,
+      ...token,
+    };
   }
 }
