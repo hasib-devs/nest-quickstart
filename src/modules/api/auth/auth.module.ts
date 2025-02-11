@@ -6,6 +6,7 @@ import { HashService } from '@/common/services/hash.service';
 import { UserRepository } from '@/database/repositories/users.repository';
 import { DrizzleModule } from '@/common/modules/drizzle.module';
 import { JwtService } from '@nestjs/jwt';
+import { IsEmailUniqueConstraint } from '@/common/validators/is-email-unique.validator';
 
 @Module({
   imports: [DrizzleModule],
@@ -17,6 +18,7 @@ import { JwtService } from '@nestjs/jwt';
     UserRepository,
     AuthModule,
     JwtService,
+    IsEmailUniqueConstraint,
   ],
 })
 export class AuthModule {}

@@ -38,10 +38,11 @@ export class AuthController {
 
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
-    const user = await this.userService.create(signupDto);
-    const token = this.authService.generateToken(user);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userData } = await this.userService.create(signupDto);
+    const token = this.authService.generateToken(userData);
     return {
-      user,
+      user: userData,
       ...token,
     };
   }

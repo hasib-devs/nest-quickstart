@@ -18,7 +18,7 @@ export class CreateUserDto {
   password: string;
 
   @IsOptional()
-  @Transform(({ value }: { value: string }) =>
+  @Transform(({ value }: { value?: string }) =>
     value ? value.toLowerCase() : value,
   )
   @IsEnum(Role, {

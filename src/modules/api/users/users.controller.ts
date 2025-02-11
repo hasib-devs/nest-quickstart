@@ -11,6 +11,8 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
+import { plainToInstance } from 'class-transformer';
+import { UserResponseDto } from './dto/user-response-dto';
 
 @Controller('api/users')
 export class UsersController {
@@ -18,16 +20,17 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...userData } =
-      await this.usersService.create(createUserDto);
+    const data = await this.usersService.create(createUserDto);
 
-    return userData;
+    return plainToInstance(UserResponseDto, data);
   }
 
   @Get()
   async findAll() {
-    return await this.usersService.findAll();
+    const data = await this.usersService.findAll();
+    return plainToInstance(UserResponseDto, data, {
+      excludeExtraneousValues: true,
+    });
   }
 
   @Get(':id')
