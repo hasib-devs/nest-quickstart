@@ -28,7 +28,7 @@ export class AuthController {
 
     return {
       user: userData,
-      token,
+      ...token,
     };
   }
   @Post('signup')

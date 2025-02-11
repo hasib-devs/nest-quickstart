@@ -28,9 +28,17 @@ export class AuthService {
       sub: id,
       roles,
     };
-    return this.jwtService.sign(payload, {
-      secret: 'super-secret',
-    });
+
+    return {
+      access_token: this.jwtService.sign(payload, {
+        secret: 'super-secret',
+        expiresIn: '1h',
+      }),
+      refresh_token: this.jwtService.sign(payload, {
+        secret: 'super-secret',
+        expiresIn: '7d',
+      }),
+    };
   }
 
   verifyToken(token: string) {
