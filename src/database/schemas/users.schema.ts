@@ -15,8 +15,18 @@ export const usersTable = pgTable(
     name: varchar('name', { length: 255 }).notNull(),
     email: text('email').unique().notNull(),
     password: text('password').notNull(),
-    role: varchar('role', { length: 15 }).notNull().default('user'),
+    roles: varchar('roles', { length: 255 }).notNull().default('user'),
     ...timestamps,
   },
   (table) => [uniqueIndex('email_idx').on(table.email)],
 );
+
+export type User = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  roles: string;
+  created_at: Date;
+  updated_at: Date | null;
+};

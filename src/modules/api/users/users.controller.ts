@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -16,8 +17,12 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userData } =
+      await this.usersService.create(createUserDto);
+
+    return userData;
   }
 
   @Get()
@@ -26,8 +31,17 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.usersService.findOne(id);
+  async findOne(@Param('id') id: number) {
+    const data = await this.usersService.findOne(id);
+
+    if (!data) {
+      throw new NotFoundException({
+        statusCode: 404,
+        message: 'User not found',
+      });
+    }
+
+    return data;
   }
 
   @Patch(':id')

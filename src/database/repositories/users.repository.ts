@@ -32,10 +32,16 @@ export class UserRepository {
   }
 
   async findByEmail(email: string) {
-    return await this.db
+    const result = await this.db
       .select()
       .from(usersTable)
       .where(eq(usersTable.email, email));
+
+    if (result.length === 0) {
+      return null;
+    }
+
+    return result[0];
   }
 
   async createUser(createUserDto: CreateUserDto) {

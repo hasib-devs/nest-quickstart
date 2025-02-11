@@ -1,42 +1,38 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
-  Delete,
+  Controller,
+  Post,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { SigninDto, SignupDto } from './dto/auth.dto';
 
-@Controller('api/auth')
+@Controller('api')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
-  }
+  @Post('signin')
+  async signin(@Body() signinDto: SigninDto) {
+    const user = await this.authService.validateUser(signinDto);
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
+    if (!user) {
+      throw new UnprocessableEntityException({
+        statusCode: 422,
+        message: 'Invalid email or password',
+      });
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
+    const token = this.authService.generateToken(user);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userData } = user;
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
+    return {
+      user: userData,
+      token,
+    };
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Post('signup')
+  signup(@Body() signupDto: SignupDto) {
+    return signupDto;
   }
 }

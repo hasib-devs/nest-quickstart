@@ -1,26 +1,39 @@
+import { User } from '@/database/schemas';
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '../users/users.service';
+import { HashService } from '@/common/services/hash.service';
+import { SigninDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    private jwtService: JwtService,
+    private readonly userService: UsersService,
+    private readonly hashService: HashService,
+  ) {}
+  async validateUser(signinDto: SigninDto) {
+    const user = await this.userService.findOne(signinDto.email);
+    if (
+      user &&
+      (await this.hashService.compareHash(signinDto.password, user.password))
+    ) {
+      return user;
+    }
+
+    return null;
+  }
+  generateToken({ id, roles }: { id: number; roles: string }) {
+    const payload = {
+      sub: id,
+      roles,
+    };
+    return this.jwtService.sign(payload, {
+      secret: 'super-secret',
+    });
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  verifyToken(token: string) {
+    return this.jwtService.verify<User>(token);
   }
 }

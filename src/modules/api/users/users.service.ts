@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HashService } from '@/common/services/hash.service';
+import { Injectable } from '@nestjs/common';
+import { UserRepository } from '../../../database/repositories/users.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRepository } from '../../../database/repositories/users.repository';
-import { HashService } from '@/common/services/hash.service';
 
 @Injectable()
 export class UsersService {
@@ -15,31 +15,25 @@ export class UsersService {
       ...createUserDto,
       password: await this.hashService.makeHash(createUserDto.password),
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...userData } =
-      await this.userRepository.createUser(payload);
-    return userData;
+
+    return await this.userRepository.createUser(payload);
   }
 
   async findAll() {
-    const data = await this.userRepository.findAll();
-    return data;
+    return await this.userRepository.findAll();
   }
 
-  async findOne(identifier: number) {
-    const data = await this.userRepository.findById(identifier);
-    if (!data) {
-      throw new NotFoundException({
-        message: 'User not found',
-      });
+  async findOne(identifier: number | string) {
+    if (typeof identifier === 'string') {
+      return await this.userRepository.findByEmail(identifier);
     }
 
-    return data;
+    return await this.userRepository.findById(identifier);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return {
-      message: 'This action updates a #${id} user',
+      message: `This action updates a ${id} user`,
       id,
       ...updateUserDto,
     };
@@ -47,7 +41,7 @@ export class UsersService {
 
   remove(id: number) {
     return {
-      message: 'This action removes a #${id} user',
+      message: `This action removes a ${id} user`,
       id,
     };
   }
