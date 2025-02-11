@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRepository } from '../../../common/repositories/users.repository';
+import { UserRepository } from '../../../database/repositories/users.repository';
 import { HashService } from '@/common/services/hash.service';
 
 @Injectable()
