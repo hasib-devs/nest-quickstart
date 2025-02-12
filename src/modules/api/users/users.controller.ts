@@ -22,7 +22,9 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     const data = await this.usersService.create(createUserDto);
 
-    return plainToInstance(UserResponseDto, data);
+    return plainToInstance(UserResponseDto, data, {
+      excludeExtraneousValues: true,
+    });
   }
 
   @Get()

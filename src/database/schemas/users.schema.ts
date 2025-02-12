@@ -1,3 +1,4 @@
+import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import {
   pgTable,
   serial,
@@ -21,12 +22,5 @@ export const usersTable = pgTable(
   (table) => [uniqueIndex('email_idx').on(table.email)],
 );
 
-export type User = {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  roles: string;
-  created_at: Date;
-  updated_at: Date | null;
-};
+export type User = InferSelectModel<typeof usersTable>;
+export type UserCreate = InferInsertModel<typeof usersTable>;

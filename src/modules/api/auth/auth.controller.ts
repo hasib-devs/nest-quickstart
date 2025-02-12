@@ -7,6 +7,8 @@ import {
 import { AuthService } from './auth.service';
 import { SigninDto, SignupDto } from './dto/auth.dto';
 import { UsersService } from '../users/users.service';
+import { plainToInstance } from 'class-transformer';
+import { UserResponseDto } from '../users/dto/user-response-dto';
 
 @Controller('api')
 export class AuthController {
@@ -27,11 +29,11 @@ export class AuthController {
     }
 
     const token = this.authService.generateToken(user);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...userData } = user;
 
     return {
-      user: userData,
+      user: plainToInstance(UserResponseDto, user, {
+        excludeExtraneousValues: true,
+      }),
       ...token,
     };
   }
@@ -39,10 +41,12 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...userData } = await this.userService.create(signupDto);
-    const token = this.authService.generateToken(userData);
+    const data = await this.userService.create(signupDto);
+    const token = this.authService.generateToken(data);
     return {
-      user: userData,
+      user: plainToInstance(UserResponseDto, data, {
+        excludeExtraneousValues: true,
+      }),
       ...token,
     };
   }
