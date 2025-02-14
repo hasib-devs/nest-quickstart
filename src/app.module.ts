@@ -1,22 +1,13 @@
-import { AuthModule } from '@/modules/api/auth/auth.module';
-import { BlogsModule } from '@/modules/api/blogs/blogs.module';
-import { UsersModule } from '@/modules/api/users/users.module';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import envConfig from './config/env.config';
+import ApiModule from './modules/api/api.module';
+import WebModule from './modules/web/web.module';
+import ConfigModule from './common/modules/config.module';
+import { DrizzleModule } from './common/modules/drizzle.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [envConfig],
-    }),
-    UsersModule,
-    BlogsModule,
-    AuthModule,
-  ],
+  imports: [ApiModule, WebModule, ConfigModule, DrizzleModule],
   controllers: [AppController],
   providers: [AppService],
 })
