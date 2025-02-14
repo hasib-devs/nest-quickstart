@@ -3,7 +3,7 @@ import {
   DrizzleAsyncProvider,
 } from '@/common/providers/drizzle.provider';
 import { usersTable } from '@/database/schemas/users.schema';
-import { CreateUserDto } from '@/modules/api/users/dto/create-user.dto';
+import { CreateUserDto } from '@/modules/core/users/dto/create-user.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 

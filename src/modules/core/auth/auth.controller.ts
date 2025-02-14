@@ -10,7 +10,7 @@ import { UsersService } from '../users/users.service';
 import { plainToInstance } from 'class-transformer';
 import { UserResponseDto } from '../users/dto/user-response-dto';
 
-@Controller('api')
+@Controller('api/auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -40,7 +40,6 @@ export class AuthController {
 
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const data = await this.userService.create(signupDto);
     const token = this.authService.generateToken(data);
     return {

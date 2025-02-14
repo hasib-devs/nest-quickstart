@@ -12,16 +12,21 @@ export class AuthService {
     private readonly userService: UsersService,
     private readonly hashService: HashService,
   ) {}
-  async validateUser(signinDto: SigninDto) {
-    const user = await this.userService.findByEmail(signinDto.email);
-    if (
-      user &&
-      (await this.hashService.compareHash(signinDto.password, user.password))
-    ) {
-      return user;
-    }
+  async validateUser(signinDto: SigninDto): Promise<User | null> {
+    try {
+      const user = await this.userService.findByEmail(signinDto.email);
+      if (
+        user &&
+        (await this.hashService.compareHash(signinDto.password, user.password))
+      ) {
+        return user;
+      }
 
-    return null;
+      return null;
+    } catch (error) {
+      console.log(`AuthService -> validateUser -> error`, error);
+      return null;
+    }
   }
   generateToken({ id, roles }: { id: number; roles: string }) {
     const payload = {
