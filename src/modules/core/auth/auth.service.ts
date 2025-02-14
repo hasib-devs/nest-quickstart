@@ -1,7 +1,7 @@
 import { User } from '@/database/schemas';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../user/user.service';
 import { HashService } from '@/common/services/hash.service';
 import { SigninDto } from './dto/auth.dto';
 

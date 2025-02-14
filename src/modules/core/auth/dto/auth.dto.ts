@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
-import { CreateUserDto } from '../../users/dto/create-user.dto';
+import { CreateUserDto } from '../../user/dto/create-user.dto';
 
 export class SigninDto {
   @IsEmail({}, { message: 'Invalid email' })

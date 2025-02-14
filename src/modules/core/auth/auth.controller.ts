@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SigninDto, SignupDto } from './dto/auth.dto';
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../user/user.service';
 import { plainToInstance } from 'class-transformer';
-import { UserResponseDto } from '../users/dto/user-response-dto';
+import { UserResponseDto } from '../user/dto/user-response-dto';
 
 @Controller('api/auth')
 export class AuthController {

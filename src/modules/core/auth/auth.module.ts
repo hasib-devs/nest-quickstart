@@ -3,7 +3,7 @@ import { IsEmailUniqueConstraint } from '@/common/validators/is-email-unique.val
 import { UserRepository } from '@/database/repositories/users.repository';
 import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../user/user.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { DrizzleModule } from '@/common/modules/drizzle.module';

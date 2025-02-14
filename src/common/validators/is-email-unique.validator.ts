@@ -1,5 +1,5 @@
-import { CreateUserDto } from '@/modules/core/users/dto/create-user.dto';
-import { UsersService } from '@/modules/core/users/users.service';
+import { CreateUserDto } from '@/modules/core/user/dto/create-user.dto';
+import { UsersService } from '@/modules/core/user/user.service';
 import { Injectable } from '@nestjs/common';
 import {
   ValidationOptions,

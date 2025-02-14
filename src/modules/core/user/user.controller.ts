@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService } from './users.service';
+import { UsersService } from './user.service';
 import { plainToInstance } from 'class-transformer';
 import { UserResponseDto } from './dto/user-response-dto';
 
 @Controller('api/users')
-export class UsersController {
+export class UserController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
