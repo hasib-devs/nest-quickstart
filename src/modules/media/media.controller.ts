@@ -1,5 +1,6 @@
 import { MikroORM } from '@mikro-orm/postgresql';
 import { Controller, Delete, Get, Post } from '@nestjs/common';
+import { Media } from './entities/media.entity';
 
 @Controller('api/media')
 export class MediaController {
@@ -7,7 +8,7 @@ export class MediaController {
 
   @Get()
   findAll() {
-    console.log({
+    console.dir({
       em: this.orm.em,
       schema: this.orm.schema,
     });
@@ -20,7 +21,10 @@ export class MediaController {
   }
 
   @Post()
-  create() {
+  async create() {
+    const media = new Media();
+    media.name = 'My media';
+    await this.orm.em.persist(media).flush();
     return 'Create media';
   }
 

@@ -7,23 +7,38 @@ export class EnvConfig {
 
   @IsNotEmpty()
   @IsString()
-  DATABASE_URL!: string;
+  PG_DB_HOST!: string;
+
+  @IsNotEmpty()
+  PG_DB_PORT!: number;
+
+  @IsString()
+  PG_DB_USER!: string;
+
+  @IsString()
+  PG_DB_PASSWORD!: string;
 
   @IsNotEmpty()
   @IsString()
-  DATABASE_HOST!: string;
-
-  @IsNotEmpty()
-  DATABASE_PORT!: number;
+  PG_DB_NAME!: string;
 
   @IsNotEmpty()
   @IsString()
-  DATABASE_NAME!: string;
+  NOSQL_DB_HOST!: string;
 
-  DATABASE_USER!: string;
-  DATABASE_PASSWORD!: string;
+  @IsNotEmpty()
+  NOSQL_DB_PORT!: number;
 
   @IsString()
+  NOSQL_DB_USER!: string;
+
+  @IsString()
+  NOSQL_DB_PASSWORD!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  NOSQL_DB_NAME!: string;
+
   @IsNotEmpty()
   @IsString()
   ENCRYPTION_KEY!: string;

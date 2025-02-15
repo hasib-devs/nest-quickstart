@@ -23,7 +23,7 @@ export class HashService {
         type: argon2.argon2id,
       });
     } catch (error) {
-      console.log(`Error making hash: ${error}`);
+      console.error(`Error making hash: ${error}`);
       return value;
     }
   }
@@ -34,7 +34,7 @@ export class HashService {
         secret: this.hashSecret,
       });
     } catch (error) {
-      console.log(`Error comparing hash: ${error}`);
+      console.error(`Error comparing hash: ${error}`);
       return false;
     }
   }

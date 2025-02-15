@@ -24,7 +24,7 @@ export class AuthService {
 
       return null;
     } catch (error) {
-      console.log(`AuthService -> validateUser -> error`, error);
+      console.error(`AuthService -> validateUser -> error`, error);
       return null;
     }
   }
