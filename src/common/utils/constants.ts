@@ -9,6 +9,6 @@ export const PG_DB_NAME = process.env.PG_DB_NAME || 'nest-quickstart';
 
 export const NOSQL_DB_HOST = process.env.NOSQL_DB_HOST || 'localhost';
 export const NOSQL_DB_PORT = Number(process.env.NOSQL_DB_PORT || 27017);
-export const NOSQL_DB_USER = process.env.NOSQL_DB_USER || '';
-export const NOSQL_DB_PASSWORD = process.env.NOSQL_DB_PASSWORD || '';
+export const NOSQL_DB_USER = process.env.NOSQL_DB_USER;
+export const NOSQL_DB_PASSWORD = process.env.NOSQL_DB_PASSWORD;
 export const NOSQL_DB_NAME = process.env.NOSQL_DB_NAME || 'nest-quickstart';

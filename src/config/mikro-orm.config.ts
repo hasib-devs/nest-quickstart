@@ -1,15 +1,27 @@
-import { defineConfig, PostgreSqlDriver } from '@mikro-orm/postgresql';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+import {
+  NOSQL_DB_HOST,
+  NOSQL_DB_PORT,
+  NOSQL_DB_USER,
+  NOSQL_DB_PASSWORD,
+  NOSQL_DB_NAME,
+} from '@/common/utils/constants';
+
+import { defineConfig, MongoDriver } from '@mikro-orm/mongodb';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
+const clientUrl =
+  NOSQL_DB_USER && NOSQL_DB_PASSWORD
+    ? `mongodb://${NOSQL_DB_USER}:${encodeURIComponent(NOSQL_DB_PASSWORD)}@${NOSQL_DB_HOST}:${NOSQL_DB_PORT}/${NOSQL_DB_NAME}`
+    : `mongodb://${NOSQL_DB_HOST}:${NOSQL_DB_PORT}/${NOSQL_DB_NAME}`;
+
 export default defineConfig({
-  entities: ['dist/**/*.entity.js'],
-  entitiesTs: ['src/**/*.entity.ts'],
-  driver: PostgreSqlDriver,
-  host: 'localhost',
-  port: 5432,
-  user: '',
-  password: '',
+  driver: MongoDriver,
+  clientUrl,
   debug: true,
-  dbName: 'nest-quickstart',
+  entitiesTs: ['src/**/*.entity.ts'],
+  entities: ['dist/**/*.entity.js'],
   metadataProvider: TsMorphMetadataProvider,
 });
