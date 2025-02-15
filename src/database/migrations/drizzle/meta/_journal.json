@@ -12,8 +12,8 @@
     {
       "idx": 1,
       "version": "7",
-      "when": 1739602969267,
-      "tag": "0001_create_blogs_table",
+      "when": 1739608627193,
+      "tag": "0001_create_posts_table",
       "breakpoints": true
     }
   ]

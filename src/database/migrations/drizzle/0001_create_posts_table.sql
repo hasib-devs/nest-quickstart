@@ -1,4 +1,4 @@
-CREATE TABLE "blogs" (
+CREATE TABLE "posts" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" varchar(255) NOT NULL,
 	"content" text NOT NULL,
@@ -7,4 +7,4 @@ CREATE TABLE "blogs" (
 	"deleted_at" timestamp
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX "title_idx" ON "blogs" USING btree ("title");
+CREATE UNIQUE INDEX "title_idx" ON "posts" USING btree ("title");
