@@ -1,5 +1,7 @@
-import { defineConfig } from 'drizzle-kit';
 import * as dotenv from 'dotenv';
+dotenv.config();
+
+import { defineConfig } from 'drizzle-kit';
 import {
   PG_DB_HOST,
   PG_DB_PORT,
@@ -8,8 +10,7 @@ import {
   PG_DB_NAME,
 } from '@/common/utils/constants';
 
-// Load environment variables from .env
-dotenv.config();
+const URL = `postgresql://${PG_DB_USER}:${PG_DB_PASSWORD}@${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}`;
 
 export default defineConfig({
   dialect: 'postgresql',
@@ -19,10 +20,6 @@ export default defineConfig({
   verbose: true,
 
   dbCredentials: {
-    host: PG_DB_HOST,
-    port: PG_DB_PORT,
-    user: PG_DB_USER,
-    password: PG_DB_PASSWORD,
-    database: PG_DB_NAME,
+    url: URL,
   },
 });
