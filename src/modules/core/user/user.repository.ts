@@ -1,17 +1,15 @@
-import {
-  Database,
-  DrizzleAsyncProvider,
-} from '@/common/providers/drizzle.provider';
-import { usersTable } from '@/database/schemas/users.schema';
+import { DrizzleAsyncProvider } from '@/common/providers/drizzle.provider';
 import { CreateUserDto } from '@/modules/core/user/dto/create-user.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
+import { usersTable } from './users.schema';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 @Injectable()
 export class UserRepository {
   constructor(
     @Inject(DrizzleAsyncProvider)
-    private readonly db: Database,
+    private readonly db: NodePgDatabase,
   ) {}
 
   async findAll() {

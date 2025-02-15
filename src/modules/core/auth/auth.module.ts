@@ -1,6 +1,6 @@
 import { HashService } from '@/common/services/hash.service';
 import { IsEmailUniqueConstraint } from '@/common/validators/is-email-unique.validator';
-import { UserRepository } from '@/database/repositories/users.repository';
+import { UserRepository } from '@/modules/core/user/user.repository';
 import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../user/user.service';

@@ -1,6 +1,6 @@
 import { HashService } from '@/common/services/hash.service';
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../../../database/repositories/users.repository';
+import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
