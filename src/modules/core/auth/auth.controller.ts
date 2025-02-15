@@ -17,7 +17,7 @@ export class AuthController {
     private readonly userService: UsersService,
   ) {}
 
-  @Post('signin')
+  @Post('sign-in')
   async signin(@Body() signinDto: SigninDto) {
     const user = await this.authService.validateUser(signinDto);
 
@@ -28,7 +28,7 @@ export class AuthController {
       });
     }
 
-    const token = this.authService.generateToken(user);
+    const token = this.authService.generateTokens(user);
 
     return {
       user: plainToInstance(UserResponseDto, user, {
@@ -38,10 +38,10 @@ export class AuthController {
     };
   }
 
-  @Post('signup')
+  @Post('sign-up')
   async signup(@Body() signupDto: SignupDto) {
     const data = await this.userService.create(signupDto);
-    const token = this.authService.generateToken(data);
+    const token = this.authService.generateTokens(data);
     return {
       user: plainToInstance(UserResponseDto, data, {
         excludeExtraneousValues: true,

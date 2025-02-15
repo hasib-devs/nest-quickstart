@@ -28,7 +28,7 @@ export class AuthService {
       return null;
     }
   }
-  generateToken({ id, roles }: { id: number; roles: string }) {
+  generateTokens({ id, roles }: { id: number; roles: string }) {
     const payload = {
       sub: id,
       roles,

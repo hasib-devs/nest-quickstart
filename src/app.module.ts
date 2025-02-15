@@ -7,7 +7,7 @@ import CoreModule from './modules/core/core.module';
 import { MediaModule } from './modules/media/media.module';
 
 @Module({
-  imports: [CoreModule, BlogModule, MediaModule, ConfigModule, MediaModule],
+  imports: [CoreModule, BlogModule, MediaModule, ConfigModule],
   controllers: [AppController],
   providers: [AppService],
 })
