@@ -1,30 +1,31 @@
-import { Controller } from '@nestjs/common';
+import { MikroORM } from '@mikro-orm/postgresql';
+import { Controller, Delete, Get, Post } from '@nestjs/common';
 
-@Controller('media')
+@Controller('api/media')
 export class MediaController {
-  constructor() {}
+  constructor(private readonly orm: MikroORM) {}
 
-  public uploadFile() {
-    return {
-      message: 'File uploaded successfully',
-    };
+  @Get()
+  findAll() {
+    console.log({
+      em: this.orm.em,
+      schema: this.orm.schema,
+    });
+    return 'All media';
   }
 
-  public deleteFile() {
-    return {
-      message: 'File deleted successfully',
-    };
+  @Get(':id')
+  findOne() {
+    return 'One media';
   }
 
-  public getFile() {
-    return {
-      message: 'File retrieved successfully',
-    };
+  @Post()
+  create() {
+    return 'Create media';
   }
 
-  public getFiles() {
-    return {
-      message: 'Files retrieved successfully',
-    };
+  @Delete()
+  remove() {
+    return 'Delete media';
   }
 }

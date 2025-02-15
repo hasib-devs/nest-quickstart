@@ -11,6 +11,21 @@ export class EnvConfig {
 
   @IsNotEmpty()
   @IsString()
+  DATABASE_HOST!: string;
+
+  @IsNotEmpty()
+  DATABASE_PORT!: number;
+
+  @IsNotEmpty()
+  @IsString()
+  DATABASE_NAME!: string;
+
+  DATABASE_USER!: string;
+  DATABASE_PASSWORD!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsString()
   ENCRYPTION_KEY!: string;
 
   @IsNotEmpty()
