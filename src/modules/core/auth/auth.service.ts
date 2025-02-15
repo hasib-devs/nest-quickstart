@@ -17,7 +17,7 @@ export class AuthService {
       const user = await this.userService.findByEmail(signinDto.email);
       if (
         user &&
-        (await this.hashService.compareHash(signinDto.password, user.password))
+        (await this.hashService.compareHash(user.password, signinDto.password))
       ) {
         return user;
       }

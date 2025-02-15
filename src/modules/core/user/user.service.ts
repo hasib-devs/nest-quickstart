@@ -13,7 +13,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const payload = {
       ...createUserDto,
-      password: await this.hashService.makeHash(createUserDto.password),
+      password: await this.hashService.generateHash(createUserDto.password),
     };
 
     return await this.userRepository.createUser(payload);
