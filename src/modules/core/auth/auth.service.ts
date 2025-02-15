@@ -35,14 +35,8 @@ export class AuthService {
     };
 
     return {
-      access_token: this.jwtService.sign(payload, {
-        secret: 'super-secret',
-        expiresIn: '1h',
-      }),
-      refresh_token: this.jwtService.sign(payload, {
-        secret: 'super-secret',
-        expiresIn: '7d',
-      }),
+      access_token: this.jwtService.sign(payload),
+      refresh_token: this.jwtService.sign(payload),
     };
   }
 
