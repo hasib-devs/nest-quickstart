@@ -14,7 +14,9 @@ dotenv.config();
 export default defineConfig({
   dialect: 'postgresql',
   schema: 'src/database/schemas',
-  out: 'src/database/migrations',
+  out: 'src/database/migrations/drizzle',
+  strict: true,
+  verbose: true,
 
   dbCredentials: {
     host: PG_DB_HOST,

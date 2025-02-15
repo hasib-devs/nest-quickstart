@@ -5,15 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1739229371087,
-      "tag": "0000_colossal_slayback",
+      "when": 1739602902576,
+      "tag": "0000_create_users_table",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1739256258491,
-      "tag": "0001_slimy_psynapse",
+      "when": 1739602969267,
+      "tag": "0001_create_blogs_table",
       "breakpoints": true
     }
   ]

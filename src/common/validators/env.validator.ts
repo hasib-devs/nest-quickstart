@@ -7,16 +7,16 @@ export class EnvConfig {
 
   @IsNotEmpty()
   @IsString()
-  PG_DB_HOST!: string;
+  PG_DB_HOST = 'localhost';
 
   @IsNotEmpty()
-  PG_DB_PORT!: number;
+  PG_DB_PORT = 5432;
 
   @IsString()
-  PG_DB_USER!: string;
+  PG_DB_USER = '';
 
   @IsString()
-  PG_DB_PASSWORD!: string;
+  PG_DB_PASSWORD = '';
 
   @IsNotEmpty()
   @IsString()
@@ -24,16 +24,16 @@ export class EnvConfig {
 
   @IsNotEmpty()
   @IsString()
-  NOSQL_DB_HOST!: string;
+  NOSQL_DB_HOST = 'localhost';
 
   @IsNotEmpty()
-  NOSQL_DB_PORT!: number;
+  NOSQL_DB_PORT = 27017;
 
   @IsString()
-  NOSQL_DB_USER!: string;
+  NOSQL_DB_USER = '';
 
   @IsString()
-  NOSQL_DB_PASSWORD!: string;
+  NOSQL_DB_PASSWORD = '';
 
   @IsNotEmpty()
   @IsString()
