@@ -1,9 +1,18 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import {
+  Entity,
+  PrimaryKey,
+  Property,
+  SerializedPrimaryKey,
+} from '@mikro-orm/core';
+import { ObjectId } from '@mikro-orm/mongodb';
 
 @Entity()
 export class Media {
   @PrimaryKey()
-  id!: number;
+  _id: ObjectId;
+
+  @SerializedPrimaryKey()
+  id!: string;
 
   @Property()
   name!: string;

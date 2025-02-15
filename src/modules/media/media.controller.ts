@@ -1,4 +1,4 @@
-import { MikroORM } from '@mikro-orm/postgresql';
+import { MikroORM } from '@mikro-orm/mongodb';
 import { Controller, Delete, Get, Post } from '@nestjs/common';
 import { Media } from './entities/media.entity';
 
