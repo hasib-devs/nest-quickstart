@@ -5,11 +5,11 @@ import {
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { timestamps } from '../../database/helpers/columns.helpers';
+import { timestamps } from '../../../database/helpers/columns.helpers';
 
 // Define a blogs table
-export const blogTable = pgTable(
-  'blogs',
+export const postTable = pgTable(
+  'posts',
   {
     id: serial('id').primaryKey(),
     title: varchar('title', { length: 255 }).notNull(),

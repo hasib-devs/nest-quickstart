@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { PostService } from './post/posts.service';
+import { PostService } from './post/post.service';
 import { CreatePostDto } from './post/dto/create-post.dto';
 import { UpdatePostDto } from './post/dto/update-post.dto';
 
